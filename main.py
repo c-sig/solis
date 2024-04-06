@@ -29,7 +29,7 @@ class MyView(discord.ui.View):
         
         await member.edit(nick=self.message_content)
         
-        await interaction.response.edit_message(content=f'Verified {applicant.mention} as {self.message_content}', view=None)
+        await interaction.response.edit_message(view=None)
         
         embed = discord.Embed(title="Application approved!", description="Thank you for applying! Please get your roles in the server to get started! Bridgewatch on top!", color=0x00ff00)
         await applicant.send(embed=embed)
@@ -37,8 +37,8 @@ class MyView(discord.ui.View):
     @discord.ui.button(label="Reject", row=1, style=discord.ButtonStyle.red)
     async def reject_callback(self, button, interaction):
         applicant = client.get_user(self.user_id)
-        await interaction.response.edit_message(content=f'Rejected {applicant.mention}', view=None)
-        embed = discord.Embed(title="Application rejected!", description="Please make sure you sent your exact username and a screenshot of your faction screen with your username visible.", color=0xff0000)
+        await interaction.response.edit_message(view=None)
+        embed = discord.Embed(title="Application rejected!", description="Reapply when you can. Please make sure you send your exact username and a screenshot of your faction screen with your username visible.", color=0xff0000)
         await applicant.send(embed=embed)
         
 
@@ -75,7 +75,7 @@ async def on_message(message):
     reply = await verification_channel.send(embed=embed)
     await message.delete(delay=1)
     await reply.delete(delay=5)
-    embed = discord.Embed(title="New application!", description=f'**Username:** {message.content}\n', color=0x00ff00)
+    embed = discord.Embed(title="Application", description=f'**Username:** {message.content}\n', color=0x00ff00)
     embed.set_image(url=message.attachments[0].url) 
     await approval_channel.send(embed=embed, view=MyView(user_id=message.author.id, message_content=message.content))
 
