@@ -46,7 +46,10 @@ class VerificationView(discord.ui.View):
         
         embed = discord.Embed(title="Application rejected!",
                               description="Possible reasons for rejection include incorrect screenshot or low faction standing. Please play for Bridgewatch more before reapplying or fix your screenshot before reapplying!\nFollow the example!", color=0xff0000)
-        await applicant.send(embed=embed)        
+        await applicant.send(embed=embed)
+        
+        await self.approval_request.delete()
+        await self.reply.delete()  
             
 class Verify(commands.Cog):
     def __init__(self, bot): 
