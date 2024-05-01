@@ -2,7 +2,7 @@ import datetime
 from discord.ext import commands
 from discord.ext import tasks
 
-TIME_CHANNEL = 1235316627952898129
+TIME_CHANNEL = 1231627268095479978
 
 class Timer(commands.Cog):
     def __init__(self, bot):
