@@ -39,17 +39,50 @@ class VerificationView(discord.ui.View):
         await self.approval_request.delete()
         await self.reply.delete()
             
-    @discord.ui.button(label="Reject", row=1, style=discord.ButtonStyle.red)
+    @discord.ui.button(label="Wrong Screenshot", row=1, style=discord.ButtonStyle.red)
     async def reject_callback(self, button, interaction):
         applicant = self.bot.get_user(self.user_id)
         await interaction.response.edit_message(view=None)
         
         embed = discord.Embed(title="Application rejected!",
-                              description="Possible reasons for rejection include incorrect screenshot or low faction standing. Please play for Bridgewatch more before reapplying or fix your screenshot before reapplying!\nFollow the example!", color=0xff0000)
-        await applicant.send(embed=embed)
+                              description="Please fix your screenshot before reapplying! Follow the example screenshot.", color=0xff0000)
+        try:
+            await applicant.send(embed=embed)
+        except:
+            pass
         
         await self.approval_request.delete()
         await self.reply.delete()  
+            
+    @discord.ui.button(label="Rank Too Low", row=2, style=discord.ButtonStyle.red)  
+    async def rank_callback(self, button, interaction):
+        applicant = self.bot.get_user(self.user_id)
+        await interaction.response.edit_message(view=None)
+        
+        embed = discord.Embed(title="Application rejected!",
+                              description="Your rank is too low! Please play for Bridgewatch more before reapplying!", color=0xff0000)
+        try:
+            await applicant.send(embed=embed)
+        except:
+            pass
+        
+        await self.approval_request.delete()
+        await self.reply.delete()
+            
+    @discord.ui.button(label="Wrong Username", row=3, style=discord.ButtonStyle.red)
+    async def username_callback(self, button, interaction):
+        applicant = self.bot.get_user(self.user_id)
+        await interaction.response.edit_message(view=None)
+        
+        embed = discord.Embed(title="Application rejected!",
+                              description="Please use your OWN username! Do not use other people's username!", color=0xff0000)
+        try:
+            await applicant.send(embed=embed)
+        except:
+            pass
+        
+        await self.approval_request.delete()
+        await self.reply.delete()        
             
 class Verify(commands.Cog):
     def __init__(self, bot): 
