@@ -50,7 +50,7 @@ class SignUp(commands.Cog):
     async def mass(self, ctx, roles: str, title: str):
         roles = roles.split(",")
         roles = [role.strip() for role in roles]  # Remove leading/trailing spaces
-        embed = discord.Embed(title=title, color=0x00ff00, description="Select the role you want to play by using the dropdown below!")
+        embed = discord.Embed(title=title, color=0x00ff00, description="Select the role you want to play by using the dropdown below! Reselect the role if you would like to unassign yourself!")
         for role in roles:
             embed.add_field(name=role, value="Unassigned", inline=True)
         view = SignUpView(bot=self.bot, roles=roles, embed=embed)
