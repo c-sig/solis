@@ -10,6 +10,7 @@ bot = discord.Bot(intents=intents)
 
 bot.load_extension('cogs.verify')
 bot.load_extension('cogs.timer')
+bot.load_extension('cogs.party')
 
 @bot.event
 async def on_ready():
